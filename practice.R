@@ -46,8 +46,30 @@ while(TRUE){
     break
   }else{
     print(line)
-    count <-count+1
+    count <-count+1  #calculate file line
   }
+ 
+ ###read configure file
+ c<-file("/home/data/All_gene_fpkm.list","r")
+count<-0  #line counts
+while(TRUE){
+  line<-readLines(c,n=1)  #read one line at a time
+  if(length(line)==0){
+    print("reached the file end")
+    break
+  }else{
+    group<-strsplit(line,split=",")  #string split function,sep was comma
+   
+    count <-count+1  #calculate file line
+  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 
 
