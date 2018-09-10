@@ -5,4 +5,18 @@ for (i in c(1:10)){
   print(d) 
 }
 
+#regular expression 
+#check c vector whether having character a or u or not
+a<-grep("[au]",c("Equator","North pole","South pole")) #return index,regular expression
+c("Equator","North pole","South pole")[a]  #extraction corresponding element of index 
+
+
+
+
+
+
+
+
+
+
 
