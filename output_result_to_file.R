@@ -8,6 +8,9 @@ sink()
 #output style showed below:
 [1]5 10
 
+data<-read.table("test_test.txt",header=T,row.names=1)  #same as perl input handle
+data<-data+10
+write.table(data,file="this_is_a_test.txt",row.names=F,col.names=F) #same as perl output handle
 
 
 
