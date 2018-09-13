@@ -10,7 +10,7 @@ for (i in 2:nrow(myres)){
                        paste(myhead_id[4],myhead_id[5],paste(myhead_id[6],myhead_id[7])))  #get T01_T02 format
   myres[i,1]=mydata[i,1] #get gene_id
   myres[i,2]=as.numeric(mydata[i,2])+as.numeric(mydata[i,3])    #sum of two column
-  myres[i,3]=as.numeric(mydata[i,4])+as.numeric(mydata[i,5])
+  myres[i,3]=as.numeric(mydata[i,4])+as.numeric(mydata[i,5])    #"as.matrix()"tranfer column string into numeric
   myres[i,4]=as.numeric(mydata[i,6])+as.numeric(mydata[i,7])
 }
 
