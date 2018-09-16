@@ -37,7 +37,8 @@ for (i in 1:nrow(myres)){
   myres[i,4]=as.numeric(mydata[i,6])+as.numeric(mydata[i,7])
 }
 
-write.table(myres,file="result.txt",append=FALSE,quote=FALSE,col.names=TRUE,sep="\t")
+write.table(myres,file="result.txt",append=FALSE,quote=FALSE,row.names=FALSE,col.names=TRUE,sep="\t")
+#append row.names=FALSE no output sequence ID,for example 1,2,3
 #quota=TRUE was add "" for output file.
 
 
