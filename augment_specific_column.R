@@ -36,7 +36,7 @@ for (i in 1:nrow(myres)){
   myres[i,3]=as.numeric(mydata[i,4])+as.numeric(mydata[i,5])
   myres[i,4]=as.numeric(mydata[i,6])+as.numeric(mydata[i,7])
 }
-myres
+
 write.table(myres,file="result.txt",append=FALSE,quote=FALSE,col.names=TRUE,sep="\t")
 #quota=TRUE was add "" for output file.
 
