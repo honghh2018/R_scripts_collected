@@ -8,6 +8,16 @@ sum<-function(x){
 }
 sum(c(1,2,3,6)) #invoking the function sum
 
+##########################
+usage<-function(x){
+  cat(x)
+  #q(status=1)
+}
+
+c<-"hello";
+usage(c)
+
+
 
 
 
