@@ -32,3 +32,6 @@ for (i in 1:nrow(fpkm_file)){
 }
 Results <- data.frame(fpkm_file[,1],r_square,pvalue)
 write.table(Results,file=opt$output,sep="\t",quote=FALSE,row.names=FALSE,col.names=TRUE)
+
+####USAGE
+#Rscripts pearson.R -f fpkm1.list -t fpkm2.list -o result.list
