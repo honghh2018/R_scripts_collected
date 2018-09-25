@@ -1,12 +1,12 @@
 library(getopt)
 spec=matrix(c(
-  'conf', 'c', 1, "string",
-  'data', 'd', 1, "string",
+  'conf', 'c', 1, "character",
+  'data', 'd', 1, "character",
   'help', 'h', 0, "logical"
 ),byrow=TRUE,ncol=4);
 #command
 opt = getopt(spec);
-if(!is.null(opt$conf)||!is.null(opt$data)||!is.null(opt$help)){
+if(is.null(opt$conf)||is.null(opt$data)||is.null(opt$help)){
   #err<-"your input was wrong!,please try again!"
  #cat(err)
   cat("1")
