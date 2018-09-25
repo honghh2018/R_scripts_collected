@@ -7,6 +7,8 @@ spec=matrix(c(
 ),byrow=TRUE,ncol=4);
 opt = getopt(spec);
 
-in_file<-read.delim(opt$infile,sep="\t",row.names=0,header = TRUE,check.names=F)
+in_file<-read.delim(opt$infile,sep="\t",header=FALSE,row.names=1) #if it have header and must be transposition,you should use header=FALSE,or header=TRUE
 result<-t(in_file)
-write.table(result,file=opt$output,row.names=0,header = TRUE,check.names=F)
+write.table(result,file=opt$output,sep="\t",quote=FALSE,row.names=FALSE)
+
+
