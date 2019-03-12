@@ -16,3 +16,4 @@ if(is.null(opt$infile)||is.null(opt$outfile)){print_err(spec)}
 in_file<-read.delim(opt$infile,sep="\t",header=TRUE,row.names=1)
 sample_cor<-cor(in_file,method="pearson",use="everything")
 write.table(sample_cor,file=opt$outfile,sep="\t",quote=FALSE,header=T,row.names=1)
+dev.off()
