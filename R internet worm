@@ -1,0 +1,47 @@
+#R internet worm
+library(XML) 
+library(RCurl)  #爬虫需要载入
+library(dplyr)
+setwd("/home/bmk/download_pdf") #set workpath to download 
+
+#download page，http://www.personal.psu.edu/iua1/courses/2013-BMMB-597D.html all pdf in it
+psu_edu_url='http://www.personal.psu.edu/iua1/courses/2013-BMMB-597D.html'
+wp=getURL(psu_edu_url)
+str(wp)
+base='http://www.personal.psu.edu/iua1/courses/file'  #comprising all pdf in backstage http server 
+#pse_edu_links=getHTMLLinks(psu_edu_url) #get main page: http://www.personal.psu.edu/iua1/courses/2013-BMMB-597D.html linkage,like http://blog.nextgenetics.net/?e=51 or ./files/2013/lecture-29.pdf：
+
+psu_edu_links=getHTMLLinks(wp) #same above annotation, more step getURL，effects like above
+psu_edu_pdf=psu_edu_links[grepl(".pdf$",psu_edu_links,perl=T)] #by perl match method .pdf tail's URL,vector save at psu_edu_pdf variable
+#test code
+test<-psu_edu_pdf[1]
+down_url0=getRelativeURL(test,base)  #jointting the string
+filename0=last(strsplit(test,"/")[[1]]) #strsplit return a object of list，only a list, so indexing one element like [[1]][1]
+filename1<-strsplit(test,"/")
+str(filename1)
+test1<-c(1,4,6,100)
+str(test1)
+test2<-data.frame(1:4,nrow=2)
+str(test2)
+test3<-list(1:4,matrix(5:8,nrow=2))
+str(test3)
+last(test1)[[1]][1] #last function return list last element
+#test
+for (pdf in psu_edu_pdf){   #using pdf variable circulated vector(psu_edu_pdf)
+  down_url=getRelativeURL(pdf,base) #merge base variable path and pdf file into a fullpath string：
+                                    #base：http://www.personal.psu.edu/iua1/courses/file,and pdf variable was./files/2013/lecture-1.pdf
+                                    #jointing fullpath like http://www.personal.psu.edu/iua1/courses/./files/2013/lecture-1.pdf，ignoring ./
+  filename=last(strsplit(pdf,"/")[[1]]) #obtainint strsplit returned list [[1]] and pick the last element(lecture-1.pdf)
+  cat("Now we down the ",filename,"\n")
+  #pdf_file=getBinaryURL(down_url)
+  #FH=file(filename,"wb")
+  #writeBin(pdf_file,FH)
+  #close(FH)
+  download.file(down_url,filename)  #download file pdf start
+}
+
+#over
+#download performing...
+#% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#Dload  Upload   Total   Spent    Left  Speed
+#0     0    0     0    0     0      0      0  15 9766k   15 1472k    0     0  61822      0  0:02:41  0:00:24  0:02:17 75323
