@@ -1,6 +1,6 @@
 #R internet worm
 library(XML) 
-library(RCurl)  #爬虫需要载入
+library(RCurl)  #internet worm need to load it 
 library(dplyr)
 setwd("/home/bmk/download_pdf") #set workpath to download 
 
