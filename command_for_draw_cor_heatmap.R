@@ -3,7 +3,7 @@ library(pheatmap)
 library(RColorBrewer)
 library(stringr)
 library(getopt)
-
+stringsAsFactors=F
 
 spec=matrix(c(
   'infile', 'i', 1, "character",
@@ -46,25 +46,30 @@ data1<-t(data)
 rowname_save=rownames(data)
 colname_save=colnames(data)
 data2<-as.data.frame(cor(data1))
-data3<-t(data2[60:80,1:50])
+data_3<-t(data2)
+write.table(data_3,file=paste(opt$outfile,'raw_data.xls',sep='/'),sep='\t',quote=FALSE,row.names=TRUE,col.names=TRUE)
+data3<-t(data2[91:121,1:60])
+colnames(data3)<-gsub('_',' ',colnames(data3))
 if(!is.null(opt$dekey)){
 	colnames(data3)<-gsub(opt$dekey,'',colnames(data3))
 	cat(paste(paste(paste("substitute for",opt$dekey,sep=' '),'down',sep=' '),'\n',sep=''))
 	write.table(data3,file=paste(opt$outfile,'cor_data_modify.xls',sep='/'),sep='\t',quote=FALSE,row.names=TRUE,col.names=TRUE)
-	pdf(file=paste0(opt$outfile,'/','cor_heatmap_modify.pdf'),onefile=FALSE,width=15,height=10)
-	pheatmap(data3,cellheight=8,cellwidth=15,
+	pdf(file=paste0(opt$outfile,'/','cor_heatmap_modify.pdf'),onefile=FALSE,width=15,height=15)
+	pheatmap(data3,cellheight=10,cellwidth=15,
                             border=FALSE,
                             frontsize_row=5,
                             frontsize_col=5,
+			    angle_col=c("45"),
                             scale='row')
 	dev.off()
 }else{
 	write.table(data3,file=paste(opt$outfile,'cor_data.xls',sep='/'),sep='\t',quote=FALSE,row.names=TRUE,col.names=TRUE)
-	pdf(file=paste0(opt$outfile,'/','cor_heatmap.pdf'),onefile=FALSE,width=15,height=10)
-	pheatmap(data3,cellheight=8,cellwidth=15,
+	pdf(file=paste0(opt$outfile,'/','cor_heatmap.pdf'),onefile=FALSE,width=15,height=15)
+	pheatmap(data3,cellheight=10,cellwidth=15,
                             border=FALSE,
                             frontsize_row=5,
                             frontsize_col=5,
+                            angle_col=c("45"),
                             scale='row')
 	dev.off()
 
