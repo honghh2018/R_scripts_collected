@@ -107,7 +107,7 @@ dev.off()
 library(stringr)
 #install.packages('xts')
 #library(xts)
-setwd('C:\\Users\\xiaohui\\Desktop\\生信笔试题')
+setwd('C:\\Users')
 All_fullname_file <- dir(path='All_sample_quantify',pattern = NULL,all.files = FALSE,full.names = TRUE,recursive = TRUE)
 
 
@@ -156,7 +156,7 @@ pd <- pd + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.min
 
 #######################
 library(stringr)
-setwd('C:\\Users\\xiaohui\\Desktop\\生信笔试题\\All_sample_quantify')
+setwd('C:\\Users')
 All_fullname_file <- dir(path='.',pattern = NULL,all.files = FALSE,full.names = TRUE,recursive = TRUE)
 
 combine_data<-NULL
