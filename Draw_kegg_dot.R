@@ -1,6 +1,6 @@
 library(ggplot2,quietly=TRUE)
 library(reshape,quietly=TRUE)
-setwd('C:\\Users\\xiaohui\\Desktop\\生信笔试题\\')
+setwd('C:\\Users\\Desktop')
 data1<-read.delim('kegg_pathway_enrichment.txt',header=T,
                                                 #row.names = 1,
                                                 sep='\t',
