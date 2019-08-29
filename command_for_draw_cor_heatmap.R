@@ -8,7 +8,7 @@ start_time=Sys.time()
 spec=matrix(c(
   'infile', 'i', 1, "character",
   'outfile', 'o', 1, "character",
-  'dekey', 'k', 1, "character",
+  'dekey', 'k', 2, "character",
   'group', 'g', 1, "character",
   'help', 'h', 0, "logical"
 ),byrow=TRUE,ncol=4)
