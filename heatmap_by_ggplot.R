@@ -1,16 +1,18 @@
 #!/usr/bin/Rscript
 library(getopt,quietly=TRUE)
+library(ggplot2)
 spec=matrix(c(
-	'infile','i',1,'character',
-	'outdir','odir',1,'character',
-	'Norm','N',2,'character',
-	'help','h',0,'logical'
-),byrow=T,ncol=4)
+	'infile', 'i', 1, "character",
+	'outdir', 'o', 1, "character",
+	'Norm', 'N', 1, "character",
+	'help', 'h', 0, "logical"
+),byrow=TRUE,ncol=4)
 
 opt=getopt(spec)
-
+cat('Comment:Clustering rows and columns in Norm Z-score be chosen but not log10\n')
 Usage<-function(){
-	stop(paste(c('Error:','\n',"Your input's files Error...",'\n','Example:','\n','heatmap_by_ggplot.R -i infile -odir outdir -N Z-score or log10','\n'),collapse=""))
+	cat('Comment:Clustering rows and columns in Norm Z-score be chosen but not log10\n')
+	stop(paste(c('Error:','\n',"Your input's files Error...",'\n','Example:','\n','heatmap_by_ggplot.R -i infile -o outdir -N Z-score or log10','\n'),collapse=""))
 	q(status=1)	
 }
 
@@ -23,7 +25,6 @@ if(!file.exists(opt$outdir)){
 	dir.create(opt$outdir)
 }
 
-library(ggplot2)
 library(reshape2,quietly=TRUE) #melt and dcast width to long
 
 #read expression table
@@ -36,8 +37,14 @@ p<-NULL
 if(opt$Norm=='Z-scorce'){
 	exprSet_Z<-as.data.frame(t(apply(exprSet1,1,scale)))
 	colnames(exprSet_Z)<-names(exprSet1)
-	exprSet_Z$ID<-rownames(exprSet1)
+	hc<-hclust(dist(exprSet_Z),method = "centroid") #row clustering
+	RowIndex<-hc$order #keep order
+	hc<-hclust(dist(t(exprSet_Z)),method = "centroid")  #column clustering
+	ColIndex<-hc$order #keep order
+	###adjustification of data frame
+	exprSet_Z<-exprSet_Z[RowIndex,ColIndex]
 	###Transform width data into long data
+	exprSet_Z$ID<-rownames(exprSet1)
 	exprSet_M<-melt(exprSet_Z,id.vars=c("ID"))
 	cat('Data cleaning over\n')
 	###plotting
@@ -61,4 +68,9 @@ if(opt$Norm=='log10'){
 }
 
 ###save files
-ggsave(p,filename=paste(c(opt$outdir,'/','heatmap.pdf'),collapse=''),width=20,height=15,units=c("cm"),colormodel="srgb")
+ggsave <- ggplot2::ggsave
+body(ggsave) <- body(ggplot2::ggsave)[-2]
+ggsave(filename='heatmap.pdf',p,path=paste(c(opt$outdir,'/'),collapse=''),width=20,height=15,units=c("cm"),colormodel="srgb")
+#pdf(file=paste(c(opt$outdir,'/','heatmap.pdf'),collapse=''),onefile=FALSE,width=15,height=15)
+#print(p)
+#dev.off()
