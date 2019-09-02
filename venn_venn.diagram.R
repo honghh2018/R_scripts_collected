@@ -13,6 +13,9 @@ library(reshape2)
 library(VennDiagram)
 #All_fullname_file <- dir('./*',pattern = NULL,all.files = FALSE,full.names = TRUE,recursive = TRUE)
 All_fullname_file1<-Sys.glob(file.path(args[1],'*.xls'),dirmark =FALSE)
+if(length(All_fullname_file1)>6){
+	stop('Can not Draw plot out of six dimension')
+}
 mydata_list<-NULL
 samplecor<-NULL
 x <- character()
@@ -36,7 +39,8 @@ for(i in 1:length(All_fullname_file1)){
 samplecor<-data.frame(DEG_group=x,Plotting_name=y)
 write.table(samplecor,file='correspondenc.txt',quote=F,sep='\t',row.names = F,col.names = T)
 
-venn_plot<-venn.diagram(x=mydata_list,filename = 'venn.tiff',
+venn_plot<-venn.diagram(x=mydata_list,main='Venn Draw',
+			filename = 'venn.tiff',
                         fill=rainbow(length(mydata_list)),
                         fontfamily = "serif",
                         fontface = 1,
