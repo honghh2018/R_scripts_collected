@@ -25,7 +25,7 @@ pca_iris<-prcomp(iris1[,1:ncol(iris)-1])
 plot(pca_iris$x, t='n', main="pca")
 text(pca_iris$x, labels=iris1$Species, col=colors[iris1$Species])
 
-Finally,T-sne algorithm was better than pca
+Finally,T-sne algorithm was better than pca algorithm for multiple dataset reducing
 
 
 Supplementary:
